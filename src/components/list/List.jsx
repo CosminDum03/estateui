@@ -1,6 +1,6 @@
-import './list.scss';
-import Card from '../card/Card';
 import { listData } from '../../lib/dummydata';
+import Card from '../card/Card';
+import './list.scss';
 
 function List() {
   return (
