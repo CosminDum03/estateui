@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import './searchBar.scss';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './searchBar.scss';
 
 const types = ['buy', 'rent'];
 
@@ -11,6 +11,16 @@ function SearchBar() {
     minPrice: 0,
     maxPrice: 0,
   });
+  const [queryString, setQueryString] = useState('');
+
+  useEffect(() => {
+    const queryString = Object.keys(query)
+      .filter((key) => query[key])
+      .map((key) => `${key}=${query[key]}`)
+      .join('&');
+
+    setQueryString(queryString);
+  }, [query]);
 
   const switchType = (val) => {
     setQuery((prev) => ({ ...prev, type: val }));
@@ -56,9 +66,7 @@ function SearchBar() {
           placeholder='Max Price'
           onChange={handleChange}
         />
-        <Link
-          to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
-        >
+        <Link to={`/list?${queryString}`}>
           <button>
             <img src='/search.png' alt='' />
           </button>
