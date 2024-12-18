@@ -1,11 +1,17 @@
+import { useSearchParams } from 'react-router-dom';
+import Card from '../../components/card/Card';
+import Filter from '../../components/filter/Filter';
+import Map from '../../components/map/Map';
 import { listData } from '../../lib/dummydata';
 import './listPage.scss';
-import Filter from '../../components/filter/Filter';
-import Card from '../../components/card/Card';
-import Map from '../../components/map/Map';
 
 function ListPage() {
-  const data = listData;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [data, setData] = useState(listData);
+
+  useEffect(() => {
+    // filter data based on searchParams.
+  });
 
   return (
     <div className='listPage'>

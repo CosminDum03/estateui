@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import './filter.scss';
 import { useSearchParams } from 'react-router-dom';
+import './filter.scss';
 
 function Filter() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -9,10 +9,21 @@ function Filter() {
     type: searchParams.get('type') || '',
     city: searchParams.get('city') || '',
     property: searchParams.get('property') || '',
-    minPrice: searchParams.get('minPrice') || 0,
-    maxPrice: searchParams.get('maxPrice') || 10000000,
-    bedroom: searchParams.get('bedroom') || 1,
+    minPrice: searchParams.get('minPrice') || null,
+    maxPrice: searchParams.get('maxPrice') || null,
+    bedroom: searchParams.get('bedroom') || null,
   });
+
+  const [queryString, setQueryString] = useState('');
+
+  useEffect(() => {
+    const queryString = Object.keys(query)
+      .filter((key) => query[key])
+      .map((key) => `${key}=${query[key]}`)
+      .join('&');
+
+    setQueryString(queryString);
+  }, [query]);
 
   const handleChange = (e) => {
     setQuery({
@@ -22,7 +33,7 @@ function Filter() {
   };
 
   const handleFilter = () => {
-    setSearchParams(query);
+    setSearchParams(queryString);
   };
 
   return (
