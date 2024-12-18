@@ -643,6 +643,7 @@ export const postData = listData.map((item) => ({
   id: item.id,
   title: item.title,
   price: item.price,
+  type: Math.random() < 0.5 ? 'rent' : 'buy',
   images: [
     item.img,
     'https://images.pexels.com/photos/1428348/pexels-photo-1428348.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
