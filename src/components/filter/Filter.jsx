@@ -116,6 +116,17 @@ function Filter() {
             defaultValue={query.bedroom}
           />
         </div>
+        <div className='item'>
+          <label htmlFor='bathroom'>Bathroom</label>
+          <input
+            type='text'
+            id='bathroom'
+            name='bathroom'
+            placeholder='any'
+            onChange={handleChange}
+            defaultValue={query.bathroom}
+          />
+        </div>
         <button onClick={handleFilter}>
           <img src='/search.png' alt='' />
         </button>

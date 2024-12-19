@@ -42,6 +42,12 @@ function ListPage() {
       );
     }
 
+    if (searchParams.get('bathroom')) {
+      filteredData = filteredData.filter(
+        (item) => item.bathroom === Number(searchParams.get('bathroom'))
+      );
+    }
+
     if (searchParams.get('property')) {
       filteredData = filteredData.filter(
         (item) => item.property === searchParams.get('property')
