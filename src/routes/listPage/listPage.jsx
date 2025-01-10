@@ -8,7 +8,27 @@ import './listPage.scss';
 
 function ListPage() {
   const [searchParams] = useSearchParams();
-  const [data, setData] = useState(listData);
+  const [data, setData] = useState(listData.slice(4));
+  const [page, setPage] = useState(1);
+
+  const loadData = () => {
+    setPage((prevState) => prevState + 1);
+  };
+
+  useEffect(() => {
+    setData(listData);
+  }, []);
+
+  const ascendingOrder = () => {
+    let ascendingItems = data.sort((a, b) => a.price - b.price);
+    setData([...ascendingItems]);
+  };
+  const descendingOrder = () => {
+    let descendingItems = data.sort((a, b) => {
+      return b.price - a.price;
+    });
+    setData([...descendingItems]);
+  };
 
   useEffect(() => {
     let filteredData = postData;
@@ -54,23 +74,31 @@ function ListPage() {
       );
     }
 
-    setData(filteredData);
-  }, [searchParams]);
+    const returnData = filteredData.slice(0, page * 4);
+    setData(returnData);
+  }, [searchParams, page]);
 
   return (
-    <div className='listPage'>
-      <div className='listContainer'>
-        <div className='wrapper'>
-          <Filter />
-          {data.map((item) => (
-            <Card key={item.id} item={item} />
-          ))}
+    <>
+      <div className='listPage'>
+        <div className='listContainer'>
+          <div className='wrapper'>
+            <Filter setPage={setPage} />
+            <div>
+              <button onClick={ascendingOrder}>Ascending Order</button>
+              <button onClick={descendingOrder}>Descending Order</button>
+            </div>
+            {data.map((item) => (
+              <Card key={item.id} item={item} />
+            ))}
+            <button onClick={loadData}>Load more</button>
+          </div>
+        </div>
+        <div className='mapContainer'>
+          <Map items={data} />
         </div>
       </div>
-      <div className='mapContainer'>
-        <Map items={data} />
-      </div>
-    </div>
+    </>
   );
 }
 

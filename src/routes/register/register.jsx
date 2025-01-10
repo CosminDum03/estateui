@@ -10,7 +10,7 @@ function Register() {
 
     const fd = new FormData(event.target);
     const data = Object.fromEntries(fd.entries());
-    if (data.password !== data['confirm-password']) {
+    if (data.password !== data.confirmPassword) {
       setPasswordsAreNotEqual(true);
       return;
     }
@@ -39,7 +39,7 @@ function Register() {
             minLength={6}
           />
           <input
-            name='confirm-password'
+            name='confirmPassword'
             type='password'
             placeholder='Confirm Password'
             required

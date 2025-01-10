@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@import '../../responsive.scss';
 
 .listPage {
   display: flex;
@@ -8,7 +8,7 @@
     flex: 3;
     height: 100%;
 
-    .wrapper{
+    .wrapper {
       height: 100%;
       padding-right: 50px;
       display: flex;
@@ -23,8 +23,18 @@
     height: 100%;
     background-color: #fcf5f3;
 
-    @include md{
+    @include md {
       display: none;
     }
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #fece51;
   }
 }

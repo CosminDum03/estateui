@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-
 import { useSearchParams } from 'react-router-dom';
 import './filter.scss';
 
-function Filter() {
+function Filter({ setPage }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState({
     type: searchParams.get('type') || '',
     city: searchParams.get('city') || '',
+    price: searchParams.get('price') || '',
     property: searchParams.get('property') || '',
     minPrice: searchParams.get('minPrice') || null,
     maxPrice: searchParams.get('maxPrice') || null,
@@ -33,6 +33,7 @@ function Filter() {
   };
 
   const handleFilter = () => {
+    setPage(1);
     setSearchParams(queryString);
   };
 
@@ -127,6 +128,7 @@ function Filter() {
             defaultValue={query.bathroom}
           />
         </div>
+
         <button onClick={handleFilter}>
           <img src='/search.png' alt='' />
         </button>

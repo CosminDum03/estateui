@@ -1,4 +1,3 @@
-import './login.scss';
 import { Link } from 'react-router-dom';
 
 function Login() {
@@ -22,6 +21,7 @@ function Login() {
           <input name='password' type='password' placeholder='Password' />
           <button type='submit'>Login</button>
           <Link to='/register'>{"Don't"} you have an account?</Link>
+          <Link to='/changePassword'>Forgot password?</Link>
         </form>
       </div>
       <div className='imgContainer'>
